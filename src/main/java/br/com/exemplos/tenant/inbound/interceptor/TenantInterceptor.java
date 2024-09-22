@@ -13,6 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -37,7 +38,7 @@ public class TenantInterceptor implements HandlerInterceptor {
 
 //            if (!liberarAplicacaoUsoInterno(httpRequest) && !validarPermissaoTenantId(httpRequest)) {
             String tenant = httpRequest.getHeader(TENANT_ID_HEADER);
-            if (!idValid(tenant)) {
+            if (!isValid(tenant)) {
                 log.info(
                         "Execução de TenantInterceptor completada em {} ms. Usuário não autorizado a utilizar o tenant.",
                         System.currentTimeMillis() - startTime);
@@ -81,7 +82,8 @@ public class TenantInterceptor implements HandlerInterceptor {
 //        return autenticacaoService.podeUtilizarEsseTenantId(token.get(), tenantId.get());
 //    }
 
-    private boolean idValid(String tenantId){
+    private boolean isValid(String tenantId){
+        if (Objects.isNull(tenantId)) return false;
         CPF cpf = new CPF(tenantId);
         return cpf.isValido();
     }

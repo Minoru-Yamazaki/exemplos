@@ -5,16 +5,12 @@ import br.com.exemplos.tenant.core.domain.context.TenantContext;
 import br.com.exemplos.tenant.core.domain.entity.Professor;
 import br.com.exemplos.tenant.core.domain.entity.multitenancy.Persona;
 import br.com.exemplos.tenant.core.domain.repository.ProfessorRepository;
-import lombok.extern.java.Log;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 

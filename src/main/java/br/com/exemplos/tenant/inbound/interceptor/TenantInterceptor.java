@@ -1,7 +1,6 @@
 package br.com.exemplos.tenant.inbound.interceptor;
 
 import br.com.caelum.stella.tinytype.CPF;
-import br.com.caelum.stella.validation.CPFValidator;
 import br.com.exemplos.exception.DomainException;
 import br.com.exemplos.tenant.core.domain.context.TenantContext;
 import br.com.exemplos.tenant.core.domain.entity.multitenancy.Persona;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Component

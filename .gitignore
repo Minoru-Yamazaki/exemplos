@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Sonar Qube ###
+sonarscanner/
+sonar-scanner/

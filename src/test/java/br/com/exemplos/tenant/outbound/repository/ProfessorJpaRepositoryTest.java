@@ -1,10 +1,10 @@
 package br.com.exemplos.tenant.outbound.repository;
 
-import br.com.exemplos.exception.DomainException;
-import br.com.exemplos.tenant.core.domain.context.TenantContext;
-import br.com.exemplos.tenant.core.domain.entity.Professor;
-import br.com.exemplos.tenant.core.domain.entity.multitenancy.Persona;
-import br.com.exemplos.tenant.core.domain.repository.ProfessorRepository;
+import br.com.exemplos.core.domain.exception.DomainException;
+import br.com.exemplos.core.domain.context.TenantContext;
+import br.com.exemplos.core.domain.entity.Professor;
+import br.com.exemplos.core.domain.entity.multitenancy.Persona;
+import br.com.exemplos.core.domain.repository.ProfessorRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

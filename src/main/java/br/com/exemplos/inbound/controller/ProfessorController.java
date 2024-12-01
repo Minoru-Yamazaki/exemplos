@@ -4,15 +4,16 @@ import br.com.exemplos.core.domain.exception.DomainException;
 import br.com.exemplos.core.domain.entity.Professor;
 import br.com.exemplos.core.domain.repository.ProfessorRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/v1/professor")
 public class ProfessorController {
 
-    private ProfessorRepository repository;
+    private final ProfessorRepository repository;
 
     @GetMapping("{id}")
     public ResponseEntity<Professor> buscarPorId(@PathVariable Long id){

@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "br.com.exemplos.tenant.outbound")
-@EntityScan(basePackages = "br.com.exemplos.tenant.core.domain.entity")
-@ComponentScan(basePackages = { "br.com.exemplos.tenant.outbound" })
+@EnableJpaRepositories(basePackages = "br.com.exemplos.outbound")
+@EntityScan(basePackages = "br.com.exemplos.core.domain.entity")
+@ComponentScan(basePackages = { "br.com.exemplos.outbound" })
 public class JPAConfiguration {
 
 }

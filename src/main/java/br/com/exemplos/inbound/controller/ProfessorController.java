@@ -1,29 +1,28 @@
 package br.com.exemplos.inbound.controller;
 
-import br.com.exemplos.core.domain.exception.DomainException;
-import br.com.exemplos.core.domain.entity.Professor;
-import br.com.exemplos.core.domain.repository.ProfessorRepository;
-import lombok.AllArgsConstructor;
+import br.com.exemplos.inbound.service.ProfessorService;
+import br.com.exemplos.inbound.dto.ProfessorDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/professor")
 public class ProfessorController {
 
-    private final ProfessorRepository repository;
+    private final ProfessorService service;
 
     @GetMapping("{id}")
-    public ResponseEntity<Professor> buscarPorId(@PathVariable Long id){
-        Professor professor = repository.findById(id).orElseThrow(DomainException::professorNaoEncontrado);
-        return ResponseEntity.ok(professor);
+    public ResponseEntity<ProfessorDTO> buscarPorId(@PathVariable Long id){
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<Professor> salvarProfessor(@RequestBody Professor professor){
-        return ResponseEntity.ok(repository.save(professor));
+    public ResponseEntity<ProfessorDTO> salvarProfessor(@RequestBody @Valid ProfessorDTO dto){
+        return ResponseEntity.ok(service.salvar(dto));
     }
 
 }

@@ -5,15 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+@Setter
 public class TenantStore {
 
     TenantStore() {
     }
 
-    @Setter
     private Persona perfilEmUso;
 
-    @Setter
     private String identificadorUsuario;
 
     public boolean hasPerfilEmUso() {

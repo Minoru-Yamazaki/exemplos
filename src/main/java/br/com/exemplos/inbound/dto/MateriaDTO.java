@@ -3,11 +3,12 @@ package br.com.exemplos.inbound.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
 @Getter
 @Setter
-public class MateriaDTO {
+public class MateriaDTO implements Serializable {
 
     private String nome;
 

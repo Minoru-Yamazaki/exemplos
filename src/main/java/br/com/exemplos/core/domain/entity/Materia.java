@@ -25,8 +25,8 @@ public class Materia extends MultiTenancyEntity {
 
     private int cargaHoraria;
 
-    @ManyToOne
     @JoinColumn(name = "idProfessor")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Professor professor;
 
 }

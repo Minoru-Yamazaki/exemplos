@@ -1,6 +1,5 @@
 package br.com.exemplos.core.domain.entity;
 
-import br.com.caelum.stella.bean.validation.CPF;
 import br.com.exemplos.core.domain.entity.multitenancy.MultiTenancyEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

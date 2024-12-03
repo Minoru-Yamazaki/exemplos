@@ -8,4 +8,8 @@ public interface ProfessorService {
 
     ProfessorDTO salvar(ProfessorDTO dto);
 
+    void excluir(Long id);
+
+    ProfessorDTO atualizar(ProfessorDTO dto);
+
 }

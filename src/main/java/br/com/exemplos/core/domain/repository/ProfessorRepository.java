@@ -10,4 +10,6 @@ public interface ProfessorRepository {
 
     Professor save(Professor professor);
 
+    void deleteById(Long id);
+
 }

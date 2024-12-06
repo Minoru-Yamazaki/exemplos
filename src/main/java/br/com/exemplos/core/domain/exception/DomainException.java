@@ -57,4 +57,8 @@ public class DomainException extends RuntimeException {
         return new DomainException("COD-05", "Professor não encontrado.", 404);
     }
 
+    public static DomainException disciplinaNaoEncontrada() {
+        return new DomainException("COD-06", "Disciplina não encontrada.", 404);
+    }
+
 }

@@ -52,6 +52,7 @@ public class DomainException extends RuntimeException {
     public static DomainException algoNaoEncontrado() {
         return new DomainException("COD-04", "X coisa não encontrada", 404);
     }
+    
     public static DomainException professorNaoEncontrado() {
         return new DomainException("COD-05", "Professor não encontrado.", 404);
     }

@@ -1,4 +1,4 @@
-package br.com.exemplos.inbound.service;
+package br.com.exemplos.inbound.service.professor;
 
 import br.com.exemplos.inbound.dto.ProfessorDTO;
 

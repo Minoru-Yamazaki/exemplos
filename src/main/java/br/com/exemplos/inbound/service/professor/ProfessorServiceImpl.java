@@ -1,4 +1,4 @@
-package br.com.exemplos.inbound.service;
+package br.com.exemplos.inbound.service.professor;
 
 import br.com.exemplos.core.domain.entity.Professor;
 import br.com.exemplos.core.domain.exception.DomainException;
@@ -25,12 +25,12 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Cacheable(value = "professores", key = "#id")
     public ProfessorDTO buscarPorId(Long id) {
         try {
-            Thread.sleep(3000); // Simula carregamento demorado
+            Thread.sleep(1000); // Simula carregamento demorado
             Professor professor = repository.findById(id)
                     .orElseThrow(DomainException::professorNaoEncontrado);
             log.info("Professor encontrado: {}", professor);
             return mapper.toDto(professor);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

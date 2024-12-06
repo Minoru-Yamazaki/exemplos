@@ -20,6 +20,6 @@ public class Professor extends MultiTenancyEntity {
     private String cpf;
 
     @OneToMany(mappedBy = "professor")
-    private List<Materia> materias;
+    private List<Disciplina> disciplinas;
 
 }

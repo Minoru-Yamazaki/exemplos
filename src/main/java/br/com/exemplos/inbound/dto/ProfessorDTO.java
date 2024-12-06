@@ -18,6 +18,6 @@ public class ProfessorDTO implements Serializable {
     @CPF
     private String cpf;
 
-    private List<MateriaDTO> materias;
+    private List<DisciplinaDTO> disciplinas;
 
 }

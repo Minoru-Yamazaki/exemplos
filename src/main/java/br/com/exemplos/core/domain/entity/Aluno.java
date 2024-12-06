@@ -2,7 +2,8 @@ package br.com.exemplos.core.domain.entity;
 
 import br.com.caelum.stella.bean.validation.CPF;
 import br.com.exemplos.core.domain.entity.multitenancy.MultiTenancyEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,6 @@ public class Aluno extends MultiTenancyEntity {
     private String cpf;
 
     @OneToMany
-    private List<Materia> materias;
+    private List<Disciplina> disciplinas;
 
 }

@@ -66,7 +66,7 @@ public class ProfessorDTO implements Serializable {
 
     private String nome;
     private String cpf;
-    private List<MateriaDTO> materias;
+    private List<DisciplinaDTO> disciplinas;
     
     // getters and setters
 

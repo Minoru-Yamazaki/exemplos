@@ -115,3 +115,50 @@ docker run --name redis -p 6379:6379 -d redis
  - TTL (Time-to-Live): Garante que o cache expira após um tempo configurado.
 
 </details>
+
+# 4 - Application Event
+
+<details>
+<summary>Publish Event</summary>
+
+Crie um evento que estenda de *ApplicationEvent* e no construtor passe uma classe que deseje recuperar.
+```java
+public class LimparCache extends ApplicationEvent {
+
+    public LimparCache(DomainCache cache) {
+        super(cache);
+    }
+
+    public DomainCache getCache(){
+        return (DomainCache) this.getSource();
+    }
+
+}
+```
+
+Publique o evento no fluxo onde desejar que ocorra a alteração.
+```java
+public class SalvarDisciplina {
+    
+    public Disciplina execute(Disciplina disciplina){
+        // código ocultado
+        applicationEventPublisher.publishEvent(new LimparCache(
+                new DomainCache("professores", disciplina.getProfessorId().toString())));    
+        return disciplina;
+    }
+
+}
+```
+Crie um *Listener* que reagirá com o evento:
+```java
+public class CacheService {
+    
+    @EventListener
+    public void on(LimparCache event){
+        // código para limpar o cache
+    }
+
+}
+```
+
+</details>

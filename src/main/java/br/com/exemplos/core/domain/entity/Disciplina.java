@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalTime;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -29,5 +30,11 @@ public class Disciplina extends MultiTenancyEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "professorId", referencedColumnName = "id", nullable = false)
     private Professor professor;
+
+    public Long getProfessorId(){
+        return Optional.ofNullable(this.professor)
+                .map(Professor::getId)
+                .orElse(null);
+    }
 
 }

@@ -1,10 +1,11 @@
-package br.com.exemplos.inbound.service.professor;
+package br.com.exemplos.inbound.service;
 
 import br.com.exemplos.core.domain.entity.Professor;
 import br.com.exemplos.core.domain.exception.DomainException;
-import br.com.exemplos.core.domain.repository.ProfessorRepository;
-import br.com.exemplos.inbound.dto.ProfessorDTO;
-import br.com.exemplos.inbound.mapper.ProfessorMapper;
+import br.com.exemplos.core.repository.ProfessorRepository;
+import br.com.exemplos.core.domain.dto.ProfessorDTO;
+import br.com.exemplos.core.domain.mapper.ProfessorMapper;
+import br.com.exemplos.core.service.ProfessorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.cache.annotation.CacheEvict;

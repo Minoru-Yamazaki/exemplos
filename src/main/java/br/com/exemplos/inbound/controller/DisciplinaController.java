@@ -1,7 +1,7 @@
 package br.com.exemplos.inbound.controller;
 
-import br.com.exemplos.inbound.dto.DisciplinaDTO;
-import br.com.exemplos.inbound.service.disciplina.DisciplinaService;
+import br.com.exemplos.core.domain.dto.DisciplinaDTO;
+import br.com.exemplos.core.service.DisciplinaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

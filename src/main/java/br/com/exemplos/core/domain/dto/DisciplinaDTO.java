@@ -1,4 +1,4 @@
-package br.com.exemplos.inbound.dto;
+package br.com.exemplos.core.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

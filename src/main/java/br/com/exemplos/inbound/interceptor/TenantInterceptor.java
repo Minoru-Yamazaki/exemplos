@@ -1,7 +1,7 @@
 package br.com.exemplos.inbound.interceptor;
 
 import br.com.caelum.stella.tinytype.CPF;
-import br.com.exemplos.core.domain.context.TenantContext;
+import br.com.exemplos.core.context.TenantContext;
 import br.com.exemplos.core.domain.exception.DomainException;
 import br.com.exemplos.core.domain.entity.multitenancy.Persona;
 import jakarta.servlet.http.HttpServletRequest;

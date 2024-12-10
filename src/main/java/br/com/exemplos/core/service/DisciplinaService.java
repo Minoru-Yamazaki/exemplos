@@ -1,6 +1,6 @@
-package br.com.exemplos.inbound.service.disciplina;
+package br.com.exemplos.core.service;
 
-import br.com.exemplos.inbound.dto.DisciplinaDTO;
+import br.com.exemplos.core.domain.dto.DisciplinaDTO;
 
 public interface DisciplinaService {
 

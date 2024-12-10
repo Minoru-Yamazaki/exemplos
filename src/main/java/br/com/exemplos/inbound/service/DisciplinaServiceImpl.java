@@ -1,11 +1,12 @@
-package br.com.exemplos.inbound.service.disciplina;
+package br.com.exemplos.inbound.service;
 
 import br.com.exemplos.core.domain.entity.Disciplina;
 import br.com.exemplos.core.domain.exception.DomainException;
-import br.com.exemplos.core.domain.repository.DisciplinaRepository;
-import br.com.exemplos.core.domain.usecase.disciplina.SalvarDisciplina;
-import br.com.exemplos.inbound.dto.DisciplinaDTO;
-import br.com.exemplos.inbound.mapper.DisciplinaMapper;
+import br.com.exemplos.core.repository.DisciplinaRepository;
+import br.com.exemplos.core.usecase.SalvarDisciplina;
+import br.com.exemplos.core.domain.dto.DisciplinaDTO;
+import br.com.exemplos.core.domain.mapper.DisciplinaMapper;
+import br.com.exemplos.core.service.DisciplinaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

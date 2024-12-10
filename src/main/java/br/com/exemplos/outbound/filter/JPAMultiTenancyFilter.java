@@ -1,6 +1,6 @@
 package br.com.exemplos.outbound.filter;
 
-import br.com.exemplos.core.domain.context.TenantContext;
+import br.com.exemplos.core.context.TenantContext;
 import br.com.exemplos.core.domain.entity.multitenancy.FiltroMultiTenancy;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;

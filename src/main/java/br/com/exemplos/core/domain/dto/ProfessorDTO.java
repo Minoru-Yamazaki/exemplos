@@ -1,4 +1,4 @@
-package br.com.exemplos.inbound.dto;
+package br.com.exemplos.core.domain.dto;
 
 import br.com.caelum.stella.bean.validation.CPF;
 import lombok.Getter;

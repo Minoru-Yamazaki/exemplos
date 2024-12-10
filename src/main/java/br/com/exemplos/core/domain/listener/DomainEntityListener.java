@@ -1,4 +1,4 @@
-package br.com.exemplos.core.domain.entity.listener;
+package br.com.exemplos.core.domain.listener;
 
 import br.com.exemplos.core.domain.entity.DomainEntity;
 import jakarta.persistence.PrePersist;

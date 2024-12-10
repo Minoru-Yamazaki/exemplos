@@ -1,9 +1,9 @@
-package br.com.exemplos.core.domain.usecase.disciplina;
+package br.com.exemplos.core.usecase;
 
 import br.com.exemplos.core.domain.entity.Disciplina;
 import br.com.exemplos.core.domain.vo.DomainCache;
-import br.com.exemplos.core.domain.repository.DisciplinaRepository;
-import br.com.exemplos.core.domain.event.cache.LimparCache;
+import br.com.exemplos.core.repository.DisciplinaRepository;
+import br.com.exemplos.core.event.LimparCache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationEventPublisher;

@@ -1,7 +1,7 @@
 package br.com.exemplos.inbound.controller;
 
-import br.com.exemplos.inbound.dto.ProfessorDTO;
-import br.com.exemplos.inbound.service.professor.ProfessorService;
+import br.com.exemplos.core.domain.dto.ProfessorDTO;
+import br.com.exemplos.core.service.ProfessorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

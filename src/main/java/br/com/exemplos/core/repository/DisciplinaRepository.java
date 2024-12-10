@@ -1,4 +1,4 @@
-package br.com.exemplos.core.domain.repository;
+package br.com.exemplos.core.repository;
 
 import br.com.exemplos.core.domain.entity.Disciplina;
 

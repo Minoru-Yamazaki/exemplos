@@ -1,6 +1,6 @@
 package br.com.exemplos.core.domain.entity;
 
-import br.com.exemplos.core.domain.entity.listener.DomainEntityListener;
+import br.com.exemplos.core.domain.listener.DomainEntityListener;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

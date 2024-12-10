@@ -1,7 +1,7 @@
 package br.com.exemplos.core.domain.entity.multitenancy;
 
 import br.com.exemplos.core.domain.entity.DomainEntity;
-import br.com.exemplos.core.domain.entity.listener.MultiTenancyListener;
+import br.com.exemplos.core.domain.listener.MultiTenancyListener;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;

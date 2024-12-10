@@ -1,6 +1,6 @@
-package br.com.exemplos.inbound.service.professor;
+package br.com.exemplos.core.service;
 
-import br.com.exemplos.inbound.dto.ProfessorDTO;
+import br.com.exemplos.core.domain.dto.ProfessorDTO;
 
 public interface ProfessorService {
 

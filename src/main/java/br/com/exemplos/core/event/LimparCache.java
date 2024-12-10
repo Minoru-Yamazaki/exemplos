@@ -1,4 +1,4 @@
-package br.com.exemplos.core.domain.event.cache;
+package br.com.exemplos.core.event;
 
 import br.com.exemplos.core.domain.vo.DomainCache;
 import org.springframework.context.ApplicationEvent;

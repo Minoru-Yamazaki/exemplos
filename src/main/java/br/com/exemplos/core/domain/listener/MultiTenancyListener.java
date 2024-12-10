@@ -1,6 +1,6 @@
-package br.com.exemplos.core.domain.entity.listener;
+package br.com.exemplos.core.domain.listener;
 
-import br.com.exemplos.core.domain.context.TenantContext;
+import br.com.exemplos.core.context.TenantContext;
 import br.com.exemplos.core.domain.entity.multitenancy.MultiTenancyEntity;
 import br.com.exemplos.core.domain.exception.DomainException;
 import jakarta.persistence.PrePersist;

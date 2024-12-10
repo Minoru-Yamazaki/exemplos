@@ -1,4 +1,4 @@
-package br.com.exemplos.core.domain.context;
+package br.com.exemplos.core.context;
 
 import br.com.exemplos.core.domain.entity.multitenancy.Persona;
 import lombok.AccessLevel;

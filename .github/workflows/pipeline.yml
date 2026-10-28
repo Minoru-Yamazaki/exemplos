@@ -1,0 +1,29 @@
+name: CI - Java
+
+on:
+  push:
+    branches:
+      [feature, release, master]
+
+  pull_request:
+    branches:
+      [feature, release, master]
+
+jobs:
+  build:
+    name: Compilar e testar
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Executar testes
+        run: mvn -B verify

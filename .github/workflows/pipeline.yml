@@ -25,5 +25,8 @@ jobs:
           java-version: '21'
           cache: maven
 
+      - name: Aplicar formatação Java
+        run: mvn spring-javaformat:apply
+
       - name: Executar testes
         run: mvn -B verify

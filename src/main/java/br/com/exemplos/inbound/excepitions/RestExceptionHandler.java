@@ -2,11 +2,9 @@ package br.com.exemplos.inbound.excepitions;
 
 import br.com.exemplos.core.domain.exception.DomainException;
 import br.com.exemplos.core.domain.exception.ValidationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.mapping.PropertyReferenceException;
+import org.springframework.data.core.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -18,6 +16,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -77,11 +77,11 @@ public class RestExceptionHandler {
                 .body(ResponseWithMessage.builder().mensagem(ex.getMessage()).codigo(ex.getCode()).build());
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(Exception.class)
     protected ResponseEntity<ResponseWithMessage> handleAnything(Exception ex) {
         String message = "Ocorreu um erro interno do servidor ao processar a solicitação. Tente novamente mais tarde.";
 
-        log.info("{}. Exception: {}", message, this.convertExceptionToJson(ex));
+        log.info("{} Exception: {}", message, this.convertExceptionToJson(ex));
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ResponseWithMessage.builder().codigo("VPO-04").mensagem(message).build());
     }
@@ -123,10 +123,10 @@ public class RestExceptionHandler {
         ExceptionDetails details = new ExceptionDetails(e);
 
         try {
-            return mapper.writeValueAsString(details);
+            return mapper.writeValueAsString(details.exceptionMessage);
         }
-        catch (JsonProcessingException jsonProcessingException) {
-            jsonProcessingException.printStackTrace();
+        catch (JacksonException jacksonException) {
+            jacksonException.printStackTrace();
             return "{}";
         }
     }

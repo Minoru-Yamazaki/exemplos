@@ -16,25 +16,23 @@ import java.util.Optional;
 @ToString(exclude = "professor")
 public class Disciplina extends MultiTenancyEntity {
 
-    private String nome;
+	private String nome;
 
-    @Enumerated(EnumType.STRING)
-    private DiaDaSemana diaDaSemana;
+	@Enumerated(EnumType.STRING)
+	private DiaDaSemana diaDaSemana;
 
-    private LocalTime horarioInicio;
+	private LocalTime horarioInicio;
 
-    private LocalTime horarioFim;
+	private LocalTime horarioFim;
 
-    private int cargaHoraria;
+	private int cargaHoraria;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "professorId", referencedColumnName = "id", nullable = false)
-    private Professor professor;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "professorId", referencedColumnName = "id", nullable = false)
+	private Professor professor;
 
-    public Long getProfessorId(){
-        return Optional.ofNullable(this.professor)
-                .map(Professor::getId)
-                .orElse(null);
-    }
+	public Long getProfessorId() {
+		return Optional.ofNullable(this.professor).map(Professor::getId).orElse(null);
+	}
 
 }

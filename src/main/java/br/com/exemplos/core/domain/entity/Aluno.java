@@ -14,14 +14,14 @@ import java.util.List;
 @Entity
 public class Aluno extends MultiTenancyEntity {
 
-    private String nome;
+	private String nome;
 
-    private int idade;
+	private int idade;
 
-    @CPF
-    private String cpf;
+	@CPF
+	private String cpf;
 
-    @OneToMany
-    private List<Disciplina> disciplinas;
+	@OneToMany
+	private List<Disciplina> disciplinas;
 
 }

@@ -112,6 +112,11 @@
 					</excludes>
 				</configuration>
 			</plugin>
+<!--		mvn spring-javaformat:apply -->
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 

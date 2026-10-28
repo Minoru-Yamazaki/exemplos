@@ -14,17 +14,17 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class SalvarDisciplina {
 
-    private final DisciplinaRepository repository;
+	private final DisciplinaRepository repository;
 
-    private final ApplicationEventPublisher applicationEventPublisher;
+	private final ApplicationEventPublisher applicationEventPublisher;
 
-    public Disciplina execute(Disciplina disciplina){
-        disciplina = repository.save(disciplina);
-        log.info("Disciplina salva: {}", disciplina);
-        if (disciplina.getProfessorId() != null)
-            applicationEventPublisher.publishEvent(new LimparCache(
-                    new DomainCache("professores", disciplina.getProfessorId().toString())));
-        return disciplina;
-    }
+	public Disciplina execute(Disciplina disciplina) {
+		disciplina = repository.save(disciplina);
+		log.info("Disciplina salva: {}", disciplina);
+		if (disciplina.getProfessorId() != null)
+			applicationEventPublisher
+				.publishEvent(new LimparCache(new DomainCache("professores", disciplina.getProfessorId().toString())));
+		return disciplina;
+	}
 
 }

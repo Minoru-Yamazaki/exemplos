@@ -5,12 +5,12 @@ import org.springframework.context.ApplicationEvent;
 
 public class LimparCache extends ApplicationEvent {
 
-    public LimparCache(DomainCache cache) {
-        super(cache);
-    }
+	public LimparCache(DomainCache cache) {
+		super(cache);
+	}
 
-    public DomainCache getCache(){
-        return (DomainCache) this.getSource();
-    }
+	public DomainCache getCache() {
+		return (DomainCache) this.getSource();
+	}
 
 }

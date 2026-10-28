@@ -4,6 +4,6 @@ import br.com.exemplos.core.event.LimparCache;
 
 public interface CacheService {
 
-    void on(LimparCache event);
+	void on(LimparCache event);
 
 }

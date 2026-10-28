@@ -6,10 +6,10 @@ import java.util.Optional;
 
 public interface DisciplinaRepository {
 
-    Optional<Disciplina> findById(Long id);
+	Optional<Disciplina> findById(Long id);
 
-    Disciplina save(Disciplina disciplina);
+	Disciplina save(Disciplina disciplina);
 
-    void deleteById(Long id);
+	void deleteById(Long id);
 
 }

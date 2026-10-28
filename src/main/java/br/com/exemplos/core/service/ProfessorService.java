@@ -4,12 +4,12 @@ import br.com.exemplos.core.domain.dto.ProfessorDTO;
 
 public interface ProfessorService {
 
-    ProfessorDTO buscarPorId(Long id);
+	ProfessorDTO buscarPorId(Long id);
 
-    ProfessorDTO salvar(ProfessorDTO dto);
+	ProfessorDTO salvar(ProfessorDTO dto);
 
-    void excluir(Long id);
+	void excluir(Long id);
 
-    ProfessorDTO atualizar(ProfessorDTO dto);
+	ProfessorDTO atualizar(ProfessorDTO dto);
 
 }

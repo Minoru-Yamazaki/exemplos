@@ -11,18 +11,18 @@ import java.time.LocalTime;
 @Setter
 public class DisciplinaDTO implements Serializable {
 
-    private String nome;
+	private String nome;
 
-    private String diaDaSemana;
+	private String diaDaSemana;
 
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime horarioInicio;
+	@JsonFormat(pattern = "HH:mm:ss")
+	private LocalTime horarioInicio;
 
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime horarioFim;
+	@JsonFormat(pattern = "HH:mm:ss")
+	private LocalTime horarioFim;
 
-    private int cargaHoraria;
+	private int cargaHoraria;
 
-    private ProfessorDTO professor;
+	private ProfessorDTO professor;
 
 }

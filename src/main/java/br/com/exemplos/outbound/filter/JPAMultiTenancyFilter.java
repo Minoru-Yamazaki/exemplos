@@ -19,50 +19,51 @@ import org.springframework.stereotype.Component;
 @Component
 public class JPAMultiTenancyFilter {
 
-    @PostConstruct
-    public void postConstruct() {
-        log.info("JPAMultiTenancyFilter iniciado!");
-    }
+	@PostConstruct
+	public void postConstruct() {
+		log.info("JPAMultiTenancyFilter iniciado!");
+	}
 
-    @PersistenceContext
-    private EntityManager entityManager;
+	@PersistenceContext
+	private EntityManager entityManager;
 
-    @Before(value = "execution(* br.com.veloe.vpo.compra.outbound.repository.*.*(..))"
-            + " || execution(* org.springframework.data.jpa.repository.support.*.*(..))"
-            + " || execution(* br.com.veloe.vpo.compra.core.domain.repository.*.*(..))")
-    public void enableFilter(JoinPoint joinPoint) {
+	@Before(value = "execution(* br.com.veloe.vpo.compra.outbound.repository.*.*(..))"
+			+ " || execution(* org.springframework.data.jpa.repository.support.*.*(..))"
+			+ " || execution(* br.com.veloe.vpo.compra.core.domain.repository.*.*(..))")
+	public void enableFilter(JoinPoint joinPoint) {
 
-        if (!(joinPoint.getThis() instanceof Repository))
-            return;
+		if (!(joinPoint.getThis() instanceof Repository))
+			return;
 
-        Session hibernateSession = (Session) entityManager.getDelegate();
+		Session hibernateSession = (Session) entityManager.getDelegate();
 
-        boolean possuiFiltro = hibernateSession.getSessionFactory().getDefinedFilterNames()
-                .contains(FiltroMultiTenancy.NOME_FILTRO);
+		boolean possuiFiltro = hibernateSession.getSessionFactory()
+			.getDefinedFilterNames()
+			.contains(FiltroMultiTenancy.NOME_FILTRO);
 
-        if (!possuiFiltro)
-            return;
+		if (!possuiFiltro)
+			return;
 
-        boolean possuiTenantId = !TenantContext.getTenantId().isBlank();
+		boolean possuiTenantId = !TenantContext.getTenantId().isBlank();
 
-        if (possuiTenantId) {
-            if (!hibernateSession.isOpen()) {
-                log.error(
-                        "Filtro {} não habilitado, sessão não gerenciada pelo springboot. Utilizar @Transactional no método.",
-                        FiltroMultiTenancy.NOME_FILTRO);
-                return;
-            }
+		if (possuiTenantId) {
+			if (!hibernateSession.isOpen()) {
+				log.error(
+						"Filtro {} não habilitado, sessão não gerenciada pelo springboot. Utilizar @Transactional no método.",
+						FiltroMultiTenancy.NOME_FILTRO);
+				return;
+			}
 
-            log.info("Filtro {} habilitado. Tenant {}.", FiltroMultiTenancy.NOME_FILTRO, TenantContext.getTenantId());
-            Filter filter = hibernateSession.enableFilter(FiltroMultiTenancy.NOME_FILTRO);
-            filter.setParameter(FiltroMultiTenancy.NOME_ATRIBUTO, TenantContext.getPerfilEmUso().getTenantId());
-        }
-        else {
-            if (hibernateSession.isOpen()) {
-                log.info("Filtro {} desabilitado. Tenant não preenchido.", FiltroMultiTenancy.NOME_FILTRO);
-                hibernateSession.disableFilter(FiltroMultiTenancy.NOME_FILTRO);
-            }
-        }
-    }
+			log.info("Filtro {} habilitado. Tenant {}.", FiltroMultiTenancy.NOME_FILTRO, TenantContext.getTenantId());
+			Filter filter = hibernateSession.enableFilter(FiltroMultiTenancy.NOME_FILTRO);
+			filter.setParameter(FiltroMultiTenancy.NOME_ATRIBUTO, TenantContext.getPerfilEmUso().getTenantId());
+		}
+		else {
+			if (hibernateSession.isOpen()) {
+				log.info("Filtro {} desabilitado. Tenant não preenchido.", FiltroMultiTenancy.NOME_FILTRO);
+				hibernateSession.disableFilter(FiltroMultiTenancy.NOME_FILTRO);
+			}
+		}
+	}
 
 }

@@ -14,23 +14,21 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DisciplinaServiceImpl implements DisciplinaService {
 
-    private final DisciplinaMapper mapper;
+	private final DisciplinaMapper mapper;
 
-    private final SalvarDisciplina salvar;
+	private final SalvarDisciplina salvar;
 
-    private final DisciplinaRepository repository;
+	private final DisciplinaRepository repository;
 
-    @Override
-    public DisciplinaDTO salvar(DisciplinaDTO dto) {
-        Disciplina disciplina = salvar.execute(mapper.toEntity(dto));
-        return mapper.toDto(disciplina);
-    }
+	@Override
+	public DisciplinaDTO salvar(DisciplinaDTO dto) {
+		Disciplina disciplina = salvar.execute(mapper.toEntity(dto));
+		return mapper.toDto(disciplina);
+	}
 
-    @Override
-    public DisciplinaDTO buscarPorId(Long id) {
-        return repository.findById(id)
-                .map(mapper::toDto)
-                .orElseThrow(DomainException::disciplinaNaoEncontrada);
-    }
+	@Override
+	public DisciplinaDTO buscarPorId(Long id) {
+		return repository.findById(id).map(mapper::toDto).orElseThrow(DomainException::disciplinaNaoEncontrada);
+	}
 
 }

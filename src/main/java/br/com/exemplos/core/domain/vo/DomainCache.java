@@ -9,13 +9,13 @@ import lombok.ToString;
 @ToString
 public class DomainCache {
 
-    private String cacheName;
+	private String cacheName;
 
-    private String key;
+	private String key;
 
-    public DomainCache(String cacheName, String key) {
-        this.cacheName = cacheName;
-        this.key = key;
-    }
+	public DomainCache(String cacheName, String key) {
+		this.cacheName = cacheName;
+		this.key = key;
+	}
 
 }

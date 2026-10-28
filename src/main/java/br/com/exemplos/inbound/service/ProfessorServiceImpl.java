@@ -27,13 +27,14 @@ public class ProfessorServiceImpl implements ProfessorService {
     public ProfessorDTO buscarPorId(Long id) {
         try {
             Thread.sleep(1000); // Simula carregamento demorado
-            Professor professor = repository.findById(id)
-                    .orElseThrow(DomainException::professorNaoEncontrado);
-            log.info("Professor encontrado: {}", professor);
-            return mapper.toDto(professor);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        Professor professor = repository.findById(id)
+                .orElseThrow(DomainException::professorNaoEncontrado);
+        log.info("Professor encontrado: {}", professor);
+        return mapper.toDto(professor);
     }
 
     @Override

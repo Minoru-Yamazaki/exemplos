@@ -33,12 +33,19 @@ public class RedisConfig {
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
 
-        // Configura os serializadores para chaves e valores
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        var keySerializer = new StringRedisSerializer();
+        var valueSerializer = GenericJacksonJsonRedisSerializer.builder()
+                .build();
+
+        template.setKeySerializer(keySerializer);
+        template.setValueSerializer(valueSerializer);
+
+        template.setHashKeySerializer(keySerializer);
+        template.setHashValueSerializer(valueSerializer);
 
         return template;
     }

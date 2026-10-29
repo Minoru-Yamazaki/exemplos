@@ -30,8 +30,8 @@
 		<java.version>21</java.version>
 		<!-- Sonar -->
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.organization>ORGANIZACAO</sonar.organization>
-		<sonar.projectKey>PROJECT_KEY</sonar.projectKey>
+		<sonar.organization>minoru-yamazaki</sonar.organization>
+		<sonar.projectKey>Minoru-Yamazaki_exemplos</sonar.projectKey>
 	</properties>
 	<dependencies>
 		<dependency>

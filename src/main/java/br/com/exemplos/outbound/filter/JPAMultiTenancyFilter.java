@@ -27,9 +27,9 @@ public class JPAMultiTenancyFilter {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	@Before(value = "execution(* br.com.veloe.vpo.compra.outbound.repository.*.*(..))"
+	@Before(value = "execution(* br.com.exemplos.outbound.repository.*.*(..))"
 			+ " || execution(* org.springframework.data.jpa.repository.support.*.*(..))"
-			+ " || execution(* br.com.veloe.vpo.compra.core.domain.repository.*.*(..))")
+			+ " || execution(* br.com.exemplos.core.repository.*.*(..))")
 	public void enableFilter(JoinPoint joinPoint) {
 
 		if (!(joinPoint.getThis() instanceof Repository))

@@ -34,16 +34,6 @@ jobs:
       - name: Validar formatação Java
         run: mvn -B spring-javaformat:validate
 
-      - name: Verificar configuração do token
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          if [ -z "$SONAR_TOKEN" ]; then
-            echo "SONAR_TOKEN não foi configurado."
-            exit 1
-          fi
-          echo "SONAR_TOKEN está configurado."
-
       - name: Executar testes e análise SonarQube
         run: >
           mvn -B verify

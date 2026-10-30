@@ -16,15 +16,15 @@ public class ValidationException extends RuntimeException {
 	}
 
 	public static ValidationException of(String message) {
-		return new ValidationException("VPO-Validation", message);
+		return new ValidationException("System-Validation", message);
 	}
 
 	public static ValidationException dataInicioAntesDataFim() {
-		return new ValidationException("VPO-Validation", "A dataInicioViagem deve ser anterior a dataFimViagem.");
+		return new ValidationException("System-Validation", "A dataInicioViagem deve ser anterior a dataFimViagem.");
 	}
 
 	public static ValidationException vigenciaNaoSuperior30Dias() {
-		return new ValidationException("VPO-Validation", "A vigência da viagem não deve ser superior a 30 dias.");
+		return new ValidationException("System-Validation", "A vigência da viagem não deve ser superior a 30 dias.");
 	}
 
 	public static void validaQuantidadeDeCaracteres(String campo, String nomeCampo, int limite) {
@@ -33,7 +33,7 @@ public class ValidationException extends RuntimeException {
 	}
 
 	public static ValidationException quantidadeDeCaracteresExcedido(String campo, int limite) {
-		return new ValidationException("VPO-Validation",
+		return new ValidationException("System-Validation",
 				"Limite máximo para o campo ".concat(campo)
 					.concat(" é de: ")
 					.concat(String.valueOf(limite))
@@ -41,16 +41,16 @@ public class ValidationException extends RuntimeException {
 	}
 
 	public static ValidationException dataAnteriorAtual(String campo) {
-		return new ValidationException("VPO-Validation", "O campo " + campo + " não deve ser anterior a data atual.");
+		return new ValidationException("System-Validation", "O campo " + campo + " não deve ser anterior a data atual.");
 	}
 
 	public static ValidationException dataHoraAnteriorAtual(String campo) {
-		return new ValidationException("VPO-Validation",
+		return new ValidationException("System-Validation",
 				"O campo " + campo + " não deve ser anterior a data e hora atual.");
 	}
 
 	public static ValidationException veiculoNaoInformado() {
-		return new ValidationException("VPO-Validation", "O campo veiculo é obrigatório.");
+		return new ValidationException("System-Validation", "O campo veiculo é obrigatório.");
 	}
 
 	public static class Message {

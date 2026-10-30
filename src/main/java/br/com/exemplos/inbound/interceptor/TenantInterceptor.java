@@ -56,7 +56,7 @@ public class TenantInterceptor implements HandlerInterceptor {
 	private void setPersonaNoTenantContext(String tenant) {
 		Persona persona = new Persona();
 		persona.setTenantId(tenant);
-		persona.setAplicacao("VPO");
+		persona.setAplicacao("COD");
 		persona.setPapel("EMBARCADOR");
 		TenantContext.setPerfilEmUso(persona);
 	}

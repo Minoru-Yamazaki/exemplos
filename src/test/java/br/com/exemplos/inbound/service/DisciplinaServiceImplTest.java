@@ -23,44 +23,44 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class DisciplinaServiceImplTest {
 
-    @Spy
-    private DisciplinaMapper mapper = new DisciplinaMapperImpl();
+	@Spy
+	private DisciplinaMapper mapper = new DisciplinaMapperImpl();
 
-    @Mock
-    private SalvarDisciplina useCase;
+	@Mock
+	private SalvarDisciplina useCase;
 
-    @Mock
-    private DisciplinaRepository repository;
+	@Mock
+	private DisciplinaRepository repository;
 
-    @InjectMocks
-    private DisciplinaServiceImpl service;
+	@InjectMocks
+	private DisciplinaServiceImpl service;
 
-    @Test
-    void salvar() {
-        when(useCase.execute(any())).thenReturn(new Disciplina());
+	@Test
+	void salvar() {
+		when(useCase.execute(any())).thenReturn(new Disciplina());
 
-        service.salvar(new DisciplinaDTO());
+		service.salvar(new DisciplinaDTO());
 
-        verify(useCase).execute(any());
-    }
+		verify(useCase).execute(any());
+	}
 
-    @Test
-    void buscarPorId() {
-        when(repository.findById(anyLong())).thenReturn(Optional.of(new Disciplina()));
+	@Test
+	void buscarPorId() {
+		when(repository.findById(anyLong())).thenReturn(Optional.of(new Disciplina()));
 
-        service.buscarPorId(1L);
+		service.buscarPorId(1L);
 
-        verify(repository).findById(1L);
-        verify(mapper).toDto(any());
-    }
+		verify(repository).findById(1L);
+		verify(mapper).toDto(any());
+	}
 
-    @Test
-    void deveLancarDisciplinaNaoEncontradaException() {
-        when(repository.findById(anyLong())).thenReturn(Optional.empty());
+	@Test
+	void deveLancarDisciplinaNaoEncontradaException() {
+		when(repository.findById(anyLong())).thenReturn(Optional.empty());
 
-        DomainException exception = assertThrows(DomainException.class, () -> service.buscarPorId(1L));
+		DomainException exception = assertThrows(DomainException.class, () -> service.buscarPorId(1L));
 
-        assertEquals(exception.getCode(), DomainException.disciplinaNaoEncontrada().getCode());
-    }
+		assertEquals(exception.getCode(), DomainException.disciplinaNaoEncontrada().getCode());
+	}
 
 }

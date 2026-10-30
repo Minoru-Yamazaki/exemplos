@@ -13,85 +13,83 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MultiTenancyListenerTest {
 
-    private MultiTenancyListener listener;
+	private MultiTenancyListener listener;
 
-    @BeforeEach
-    void setUp() {
-        listener = new MultiTenancyListener();
-        TenantContext.clear();
-    }
+	@BeforeEach
+	void setUp() {
+		listener = new MultiTenancyListener();
+		TenantContext.clear();
+	}
 
-    @AfterEach
-    void tearDown() {
-        TenantContext.clear();
-    }
+	@AfterEach
+	void tearDown() {
+		TenantContext.clear();
+	}
 
-    @Test
-    void prePersistDeveDefinirTenantIdDaContextQuandoEntidadeNaoTemTenant() {
-        configurarTenant("tenant-001");
-        Disciplina disciplina = new Disciplina();
+	@Test
+	void prePersistDeveDefinirTenantIdDaContextQuandoEntidadeNaoTemTenant() {
+		configurarTenant("tenant-001");
+		Disciplina disciplina = new Disciplina();
 
-        listener.prePersist(disciplina);
+		listener.prePersist(disciplina);
 
-        assertEquals("tenant-001", disciplina.getTenantId());
-    }
+		assertEquals("tenant-001", disciplina.getTenantId());
+	}
 
-    @Test
-    void prePersistNaoDeveSubstituirTenantIdJaDefinidoNaEntidade() {
-        configurarTenant("tenant-001");
-        Disciplina disciplina = new Disciplina();
-        disciplina.setTenantId("tenant-entidade");
+	@Test
+	void prePersistNaoDeveSubstituirTenantIdJaDefinidoNaEntidade() {
+		configurarTenant("tenant-001");
+		Disciplina disciplina = new Disciplina();
+		disciplina.setTenantId("tenant-entidade");
 
-        listener.prePersist(disciplina);
+		listener.prePersist(disciplina);
 
-        assertEquals("tenant-entidade", disciplina.getTenantId());
-    }
+		assertEquals("tenant-entidade", disciplina.getTenantId());
+	}
 
-    @Test
-    void prePersistDeveLancarExcecaoQuandoNemContextoNemEntidadeTenantDefinido() {
-        // Contexto sem tenant (blank), entidade sem tenant
-        Disciplina disciplina = new Disciplina();
+	@Test
+	void prePersistDeveLancarExcecaoQuandoNemContextoNemEntidadeTenantDefinido() {
+		// Contexto sem tenant (blank), entidade sem tenant
+		Disciplina disciplina = new Disciplina();
 
-        DomainException exception = assertThrows(DomainException.class,
-                () -> listener.prePersist(disciplina));
+		DomainException exception = assertThrows(DomainException.class, () -> listener.prePersist(disciplina));
 
-        assertEquals("SEC-1", exception.getCode());
-    }
+		assertEquals("SEC-1", exception.getCode());
+	}
 
-    @Test
-    void prePersistNaoDeveFalharQuandoEntidadeJaTemTenantSemContexto() {
-        // Contexto sem tenant, mas entidade já tem tenant definido
-        Disciplina disciplina = new Disciplina();
-        disciplina.setTenantId("tenant-pre-existente");
+	@Test
+	void prePersistNaoDeveFalharQuandoEntidadeJaTemTenantSemContexto() {
+		// Contexto sem tenant, mas entidade já tem tenant definido
+		Disciplina disciplina = new Disciplina();
+		disciplina.setTenantId("tenant-pre-existente");
 
-        assertDoesNotThrow(() -> listener.prePersist(disciplina));
-        assertEquals("tenant-pre-existente", disciplina.getTenantId());
-    }
+		assertDoesNotThrow(() -> listener.prePersist(disciplina));
+		assertEquals("tenant-pre-existente", disciplina.getTenantId());
+	}
 
-    @Test
-    void preUpdateDeveDefinirTenantIdDaContextQuandoEntidadeNaoTemTenant() {
-        configurarTenant("tenant-update");
-        Disciplina disciplina = new Disciplina();
+	@Test
+	void preUpdateDeveDefinirTenantIdDaContextQuandoEntidadeNaoTemTenant() {
+		configurarTenant("tenant-update");
+		Disciplina disciplina = new Disciplina();
 
-        listener.preUpdate(disciplina);
+		listener.preUpdate(disciplina);
 
-        assertEquals("tenant-update", disciplina.getTenantId());
-    }
+		assertEquals("tenant-update", disciplina.getTenantId());
+	}
 
-    @Test
-    void preUpdateDeveLancarExcecaoQuandoNemContextoNemEntidadeTenantDefinido() {
-        Disciplina disciplina = new Disciplina();
+	@Test
+	void preUpdateDeveLancarExcecaoQuandoNemContextoNemEntidadeTenantDefinido() {
+		Disciplina disciplina = new Disciplina();
 
-        DomainException exception = assertThrows(DomainException.class,
-                () -> listener.preUpdate(disciplina));
+		DomainException exception = assertThrows(DomainException.class, () -> listener.preUpdate(disciplina));
 
-        assertEquals("SEC-1", exception.getCode());
-    }
+		assertEquals("SEC-1", exception.getCode());
+	}
 
-    private void configurarTenant(String tenantId) {
-        Persona persona = new Persona();
-        persona.setTenantId(tenantId);
-        TenantContext.setPerfilEmUso(persona);
-    }
+	private void configurarTenant(String tenantId) {
+		Persona persona = new Persona();
+		persona.setTenantId(tenantId);
+		TenantContext.setPerfilEmUso(persona);
+	}
 
 }

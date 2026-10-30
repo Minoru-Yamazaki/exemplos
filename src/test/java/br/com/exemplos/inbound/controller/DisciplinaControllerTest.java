@@ -19,48 +19,47 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class DisciplinaControllerTest {
 
-    @Mock
-    private DisciplinaService service;
+	@Mock
+	private DisciplinaService service;
 
-    @InjectMocks
-    private DisciplinaController controller;
+	@InjectMocks
+	private DisciplinaController controller;
 
-    @Test
-    void salvarDeveRetornarStatus201ComDTO() {
-        DisciplinaDTO dto = new DisciplinaDTO();
-        dto.setNome("Matemática");
-        when(service.salvar(any())).thenReturn(dto);
+	@Test
+	void salvarDeveRetornarStatus201ComDTO() {
+		DisciplinaDTO dto = new DisciplinaDTO();
+		dto.setNome("Matemática");
+		when(service.salvar(any())).thenReturn(dto);
 
-        ResponseEntity<DisciplinaDTO> response = controller.salvar(dto);
+		ResponseEntity<DisciplinaDTO> response = controller.salvar(dto);
 
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals("Matemática", response.getBody().getNome());
-        verify(service).salvar(dto);
-    }
+		assertEquals(HttpStatus.CREATED, response.getStatusCode());
+		assertNotNull(response.getBody());
+		assertEquals("Matemática", response.getBody().getNome());
+		verify(service).salvar(dto);
+	}
 
-    @Test
-    void buscarPorIdDeveRetornarStatus200ComDTO() {
-        DisciplinaDTO dto = new DisciplinaDTO();
-        dto.setNome("Física");
-        when(service.buscarPorId(anyLong())).thenReturn(dto);
+	@Test
+	void buscarPorIdDeveRetornarStatus200ComDTO() {
+		DisciplinaDTO dto = new DisciplinaDTO();
+		dto.setNome("Física");
+		when(service.buscarPorId(anyLong())).thenReturn(dto);
 
-        ResponseEntity<DisciplinaDTO> response = controller.buscarPorId(1L);
+		ResponseEntity<DisciplinaDTO> response = controller.buscarPorId(1L);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals("Física", response.getBody().getNome());
-        verify(service).buscarPorId(1L);
-    }
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertNotNull(response.getBody());
+		assertEquals("Física", response.getBody().getNome());
+		verify(service).buscarPorId(1L);
+	}
 
-    @Test
-    void buscarPorIdDevePropagrarExcecaoQuandoNaoEncontrado() {
-        when(service.buscarPorId(anyLong())).thenThrow(DomainException.disciplinaNaoEncontrada());
+	@Test
+	void buscarPorIdDevePropagrarExcecaoQuandoNaoEncontrado() {
+		when(service.buscarPorId(anyLong())).thenThrow(DomainException.disciplinaNaoEncontrada());
 
-        DomainException exception = assertThrows(DomainException.class,
-                () -> controller.buscarPorId(99L));
+		DomainException exception = assertThrows(DomainException.class, () -> controller.buscarPorId(99L));
 
-        assertEquals(DomainException.disciplinaNaoEncontrada().getCode(), exception.getCode());
-    }
+		assertEquals(DomainException.disciplinaNaoEncontrada().getCode(), exception.getCode());
+	}
 
 }

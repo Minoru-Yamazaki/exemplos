@@ -7,33 +7,33 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LimparCacheTest {
 
-    @Test
-    void deveCriarEventoComDomainCacheCorreto() {
-        DomainCache domainCache = new DomainCache("professores", "1");
+	@Test
+	void deveCriarEventoComDomainCacheCorreto() {
+		DomainCache domainCache = new DomainCache("professores", "1");
 
-        LimparCache event = new LimparCache(domainCache);
+		LimparCache event = new LimparCache(domainCache);
 
-        assertNotNull(event.getCache());
-        assertSame(domainCache, event.getCache());
-    }
+		assertNotNull(event.getCache());
+		assertSame(domainCache, event.getCache());
+	}
 
-    @Test
-    void getCacheDeveRetornarMesmoDomainCachePassadoNoConstrutor() {
-        DomainCache domainCache = new DomainCache("disciplinas", "99");
+	@Test
+	void getCacheDeveRetornarMesmoDomainCachePassadoNoConstrutor() {
+		DomainCache domainCache = new DomainCache("disciplinas", "99");
 
-        LimparCache event = new LimparCache(domainCache);
+		LimparCache event = new LimparCache(domainCache);
 
-        assertEquals("disciplinas", event.getCache().getCacheName());
-        assertEquals("99", event.getCache().getKey());
-    }
+		assertEquals("disciplinas", event.getCache().getCacheName());
+		assertEquals("99", event.getCache().getKey());
+	}
 
-    @Test
-    void getSourceDeveSerMesmoDomainCache() {
-        DomainCache domainCache = new DomainCache("cache", "key");
+	@Test
+	void getSourceDeveSerMesmoDomainCache() {
+		DomainCache domainCache = new DomainCache("cache", "key");
 
-        LimparCache event = new LimparCache(domainCache);
+		LimparCache event = new LimparCache(domainCache);
 
-        assertSame(domainCache, event.getSource());
-    }
+		assertSame(domainCache, event.getSource());
+	}
 
 }

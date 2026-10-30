@@ -15,39 +15,39 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CacheServiceImplTest {
 
-    @Mock
-    private CacheManager cacheManager;
+	@Mock
+	private CacheManager cacheManager;
 
-    @Mock
-    private Cache cache;
+	@Mock
+	private Cache cache;
 
-    @InjectMocks
-    private CacheServiceImpl service;
+	@InjectMocks
+	private CacheServiceImpl service;
 
-    @Test
-    void deveEvictarCacheQuandoCacheExiste() {
-        DomainCache domainCache = new DomainCache("meuCache", "minha-key");
-        LimparCache event = new LimparCache(domainCache);
+	@Test
+	void deveEvictarCacheQuandoCacheExiste() {
+		DomainCache domainCache = new DomainCache("meuCache", "minha-key");
+		LimparCache event = new LimparCache(domainCache);
 
-        when(cacheManager.getCache("meuCache")).thenReturn(cache);
+		when(cacheManager.getCache("meuCache")).thenReturn(cache);
 
-        service.on(event);
+		service.on(event);
 
-        verify(cacheManager).getCache("meuCache");
-        verify(cache).evict("minha-key");
-    }
+		verify(cacheManager).getCache("meuCache");
+		verify(cache).evict("minha-key");
+	}
 
-    @Test
-    void naoDeveEvictarCacheQuandoCacheNaoEncontrado() {
-        DomainCache domainCache = new DomainCache("cacheInexistente", "qualquer-key");
-        LimparCache event = new LimparCache(domainCache);
+	@Test
+	void naoDeveEvictarCacheQuandoCacheNaoEncontrado() {
+		DomainCache domainCache = new DomainCache("cacheInexistente", "qualquer-key");
+		LimparCache event = new LimparCache(domainCache);
 
-        when(cacheManager.getCache("cacheInexistente")).thenReturn(null);
+		when(cacheManager.getCache("cacheInexistente")).thenReturn(null);
 
-        service.on(event);
+		service.on(event);
 
-        verify(cacheManager).getCache("cacheInexistente");
-        verifyNoInteractions(cache);
-    }
+		verify(cacheManager).getCache("cacheInexistente");
+		verifyNoInteractions(cache);
+	}
 
 }

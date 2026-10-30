@@ -19,54 +19,54 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class SalvarDisciplinaTest {
 
-    @Mock
-    private DisciplinaRepository repository;
+	@Mock
+	private DisciplinaRepository repository;
 
-    @Mock
-    private ApplicationEventPublisher applicationEventPublisher;
+	@Mock
+	private ApplicationEventPublisher applicationEventPublisher;
 
-    @InjectMocks
-    private SalvarDisciplina useCase;
+	@InjectMocks
+	private SalvarDisciplina useCase;
 
-    @Test
-    void deveRetornarDisciplinaSalva() {
-        Disciplina disciplina = new Disciplina();
-        when(repository.save(any())).thenReturn(disciplina);
+	@Test
+	void deveRetornarDisciplinaSalva() {
+		Disciplina disciplina = new Disciplina();
+		when(repository.save(any())).thenReturn(disciplina);
 
-        Disciplina resultado = useCase.execute(disciplina);
+		Disciplina resultado = useCase.execute(disciplina);
 
-        assertSame(disciplina, resultado);
-        verify(repository).save(disciplina);
-    }
+		assertSame(disciplina, resultado);
+		verify(repository).save(disciplina);
+	}
 
-    @Test
-    void devePublicarEventoLimparCacheQuandoProfessorIdNaoNulo() {
-        Professor professor = new Professor();
-        professor.setId(10L);
+	@Test
+	void devePublicarEventoLimparCacheQuandoProfessorIdNaoNulo() {
+		Professor professor = new Professor();
+		professor.setId(10L);
 
-        Disciplina disciplina = new Disciplina();
-        disciplina.setProfessor(professor);
+		Disciplina disciplina = new Disciplina();
+		disciplina.setProfessor(professor);
 
-        when(repository.save(any())).thenReturn(disciplina);
+		when(repository.save(any())).thenReturn(disciplina);
 
-        useCase.execute(disciplina);
+		useCase.execute(disciplina);
 
-        ArgumentCaptor<LimparCache> captor = ArgumentCaptor.forClass(LimparCache.class);
-        verify(applicationEventPublisher).publishEvent(captor.capture());
+		ArgumentCaptor<LimparCache> captor = ArgumentCaptor.forClass(LimparCache.class);
+		verify(applicationEventPublisher).publishEvent(captor.capture());
 
-        LimparCache evento = captor.getValue();
-        assertEquals("professores", evento.getCache().getCacheName());
-        assertEquals("10", evento.getCache().getKey());
-    }
+		LimparCache evento = captor.getValue();
+		assertEquals("professores", evento.getCache().getCacheName());
+		assertEquals("10", evento.getCache().getKey());
+	}
 
-    @Test
-    void naoDevePublicarEventoQuandoProfessorIdNulo() {
-        Disciplina disciplina = new Disciplina(); // sem professor
-        when(repository.save(any())).thenReturn(disciplina);
+	@Test
+	void naoDevePublicarEventoQuandoProfessorIdNulo() {
+		Disciplina disciplina = new Disciplina(); // sem professor
+		when(repository.save(any())).thenReturn(disciplina);
 
-        useCase.execute(disciplina);
+		useCase.execute(disciplina);
 
-        verify(applicationEventPublisher, never()).publishEvent(any());
-    }
+		verify(applicationEventPublisher, never()).publishEvent(any());
+	}
 
 }

@@ -23,73 +23,72 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class ProfessorServiceImplTest {
 
-    @Spy
-    private ProfessorMapper mapper = new ProfessorMapperImpl();
+	@Spy
+	private ProfessorMapper mapper = new ProfessorMapperImpl();
 
-    @Mock
-    private ProfessorRepository repository;
+	@Mock
+	private ProfessorRepository repository;
 
-    @InjectMocks
-    private ProfessorServiceImpl service;
+	@InjectMocks
+	private ProfessorServiceImpl service;
 
-    @Test
-    void buscarPorIdDeveRetornarProfessorDTO() {
-        Professor professor = new Professor();
-        professor.setNome("Maria");
-        when(repository.findById(anyLong())).thenReturn(Optional.of(professor));
+	@Test
+	void buscarPorIdDeveRetornarProfessorDTO() {
+		Professor professor = new Professor();
+		professor.setNome("Maria");
+		when(repository.findById(anyLong())).thenReturn(Optional.of(professor));
 
-        ProfessorDTO dto = service.buscarPorId(1L);
+		ProfessorDTO dto = service.buscarPorId(1L);
 
-        assertNotNull(dto);
-        verify(repository).findById(1L);
-        verify(mapper).toDto(professor);
-    }
+		assertNotNull(dto);
+		verify(repository).findById(1L);
+		verify(mapper).toDto(professor);
+	}
 
-    @Test
-    void buscarPorIdDeveLancarExcecaoQuandoNaoEncontrado() {
-        when(repository.findById(anyLong())).thenReturn(Optional.empty());
+	@Test
+	void buscarPorIdDeveLancarExcecaoQuandoNaoEncontrado() {
+		when(repository.findById(anyLong())).thenReturn(Optional.empty());
 
-        DomainException exception = assertThrows(DomainException.class,
-                () -> service.buscarPorId(99L));
+		DomainException exception = assertThrows(DomainException.class, () -> service.buscarPorId(99L));
 
-        assertEquals(DomainException.professorNaoEncontrado().getCode(), exception.getCode());
-    }
+		assertEquals(DomainException.professorNaoEncontrado().getCode(), exception.getCode());
+	}
 
-    @Test
-    void salvarDevePersistirERetornarDTO() {
-        Professor professor = new Professor();
-        professor.setNome("João");
-        when(repository.save(any())).thenReturn(professor);
+	@Test
+	void salvarDevePersistirERetornarDTO() {
+		Professor professor = new Professor();
+		professor.setNome("João");
+		when(repository.save(any())).thenReturn(professor);
 
-        ProfessorDTO dto = new ProfessorDTO();
-        dto.setNome("João");
+		ProfessorDTO dto = new ProfessorDTO();
+		dto.setNome("João");
 
-        ProfessorDTO resultado = service.salvar(dto);
+		ProfessorDTO resultado = service.salvar(dto);
 
-        assertNotNull(resultado);
-        verify(repository).save(any());
-    }
+		assertNotNull(resultado);
+		verify(repository).save(any());
+	}
 
-    @Test
-    void excluirDeveInvocarDeleteById() {
-        service.excluir(5L);
+	@Test
+	void excluirDeveInvocarDeleteById() {
+		service.excluir(5L);
 
-        verify(repository).deleteById(5L);
-    }
+		verify(repository).deleteById(5L);
+	}
 
-    @Test
-    void atualizarDevePersistirERetornarDTO() {
-        Professor professor = new Professor();
-        professor.setNome("Carlos");
-        when(repository.save(any())).thenReturn(professor);
+	@Test
+	void atualizarDevePersistirERetornarDTO() {
+		Professor professor = new Professor();
+		professor.setNome("Carlos");
+		when(repository.save(any())).thenReturn(professor);
 
-        ProfessorDTO dto = new ProfessorDTO();
-        dto.setNome("Carlos");
+		ProfessorDTO dto = new ProfessorDTO();
+		dto.setNome("Carlos");
 
-        ProfessorDTO resultado = service.atualizar(dto);
+		ProfessorDTO resultado = service.atualizar(dto);
 
-        assertNotNull(resultado);
-        verify(repository).save(any());
-    }
+		assertNotNull(resultado);
+		verify(repository).save(any());
+	}
 
 }

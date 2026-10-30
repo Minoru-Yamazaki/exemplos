@@ -41,7 +41,8 @@ public class ValidationException extends RuntimeException {
 	}
 
 	public static ValidationException dataAnteriorAtual(String campo) {
-		return new ValidationException("System-Validation", "O campo " + campo + " não deve ser anterior a data atual.");
+		return new ValidationException("System-Validation",
+				"O campo " + campo + " não deve ser anterior a data atual.");
 	}
 
 	public static ValidationException dataHoraAnteriorAtual(String campo) {

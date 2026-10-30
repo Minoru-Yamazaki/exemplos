@@ -6,40 +6,40 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DomainCacheTest {
 
-    @Test
-    void deveCriarDomainCacheComValoresCorretos() {
-        DomainCache domainCache = new DomainCache("professores", "42");
+	@Test
+	void deveCriarDomainCacheComValoresCorretos() {
+		DomainCache domainCache = new DomainCache("professores", "42");
 
-        assertEquals("professores", domainCache.getCacheName());
-        assertEquals("42", domainCache.getKey());
-    }
+		assertEquals("professores", domainCache.getCacheName());
+		assertEquals("42", domainCache.getKey());
+	}
 
-    @Test
-    void devePermitirAtualizarCacheName() {
-        DomainCache domainCache = new DomainCache("original", "key");
+	@Test
+	void devePermitirAtualizarCacheName() {
+		DomainCache domainCache = new DomainCache("original", "key");
 
-        domainCache.setCacheName("atualizado");
+		domainCache.setCacheName("atualizado");
 
-        assertEquals("atualizado", domainCache.getCacheName());
-    }
+		assertEquals("atualizado", domainCache.getCacheName());
+	}
 
-    @Test
-    void devePermitirAtualizarKey() {
-        DomainCache domainCache = new DomainCache("cache", "antiga");
+	@Test
+	void devePermitirAtualizarKey() {
+		DomainCache domainCache = new DomainCache("cache", "antiga");
 
-        domainCache.setKey("nova");
+		domainCache.setKey("nova");
 
-        assertEquals("nova", domainCache.getKey());
-    }
+		assertEquals("nova", domainCache.getKey());
+	}
 
-    @Test
-    void toStringDeveConterCacheNameEKey() {
-        DomainCache domainCache = new DomainCache("professores", "99");
+	@Test
+	void toStringDeveConterCacheNameEKey() {
+		DomainCache domainCache = new DomainCache("professores", "99");
 
-        String result = domainCache.toString();
+		String result = domainCache.toString();
 
-        assertTrue(result.contains("professores"));
-        assertTrue(result.contains("99"));
-    }
+		assertTrue(result.contains("professores"));
+		assertTrue(result.contains("99"));
+	}
 
 }

@@ -1,4 +1,4 @@
-package br.com.exemplos.inbound.excepitions;
+package br.com.exemplos.inbound.exception;
 
 import br.com.exemplos.core.domain.exception.DomainException;
 import br.com.exemplos.core.domain.exception.ValidationException;
@@ -33,7 +33,7 @@ public class RestExceptionHandler {
 		String message = "A propriedade '" + ex.getPropertyName()
 				+ "' não foi encontrada ou não é suportada para esta operação.";
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-			.body(ResponseWithMessage.builder().codigo("VPO-38").mensagem(message).build());
+			.body(ResponseWithMessage.builder().codigo("COD-02").mensagem(message).build());
 	}
 
 	@ExceptionHandler(MissingServletRequestParameterException.class)
@@ -41,7 +41,7 @@ public class RestExceptionHandler {
 			MissingServletRequestParameterException ex) {
 		String message = "O campo " + ex.getParameterName() + " é obrigatório.";
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-			.body(ResponseWithMessage.builder().codigo("VPO-01").mensagem(message).build());
+			.body(ResponseWithMessage.builder().codigo("COD-01").mensagem(message).build());
 	}
 
 	@ExceptionHandler(HttpMessageNotReadableException.class)
@@ -50,7 +50,7 @@ public class RestExceptionHandler {
 		String message = "Não foi possível realizar a solicitação devido a um ou mais erros de sintaxe. Corrija os erros e tente novamente.";
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 			.body(ResponseWithMessageAndDetail.builder()
-				.codigo("VPO-01")
+				.codigo("COD-02")
 				.mensagem(message)
 				.detalhe(this.extractDetailedMessage(ex))
 				.build());
@@ -60,7 +60,7 @@ public class RestExceptionHandler {
 	protected ResponseEntity<ResponseWithMessage> handleNoHandlerFoundException(NoHandlerFoundException ignoredEx) {
 		String message = "Recurso não encontrado.";
 		return ResponseEntity.status(HttpStatus.NOT_FOUND)
-			.body(ResponseWithMessage.builder().codigo("VPO-03").mensagem(message).build());
+			.body(ResponseWithMessage.builder().codigo("COD-03").mensagem(message).build());
 	}
 
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -87,7 +87,7 @@ public class RestExceptionHandler {
 
 		log.info("{} Exception: {}", message, this.convertExceptionToJson(ex));
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-			.body(ResponseWithMessage.builder().codigo("VPO-04").mensagem(message).build());
+			.body(ResponseWithMessage.builder().codigo("COD-04").mensagem(message).build());
 	}
 
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -97,7 +97,7 @@ public class RestExceptionHandler {
 				+ " não pôde ser lido ou não é válido.";
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 			.body(ResponseWithMessageAndDetail.builder()
-				.codigo("VPO-01")
+				.codigo("COD-05")
 				.mensagem(message)
 				.detalhe(ex.getMostSpecificCause().getMessage())
 				.build());
@@ -109,7 +109,7 @@ public class RestExceptionHandler {
 		ObjectError objectError = ex.getBindingResult().getAllErrors().get(0);
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
 			.body(ResponseWithMessage.builder()
-				.codigo("VPO-Validation")
+				.codigo("System-Validation")
 				.mensagem(objectError.getDefaultMessage())
 				.build());
 	}

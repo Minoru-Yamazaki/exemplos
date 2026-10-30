@@ -29,6 +29,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 			Thread.sleep(1000); // Simula carregamento demorado
 		}
 		catch (Exception e) {
+			Thread.currentThread().interrupt();
+			log.error("Thread interrompida", e);
 			throw new RuntimeException(e);
 		}
 

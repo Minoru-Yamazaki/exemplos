@@ -86,6 +86,11 @@ class MultiTenancyListenerTest {
 		assertEquals("SEC-1", exception.getCode());
 	}
 
+	@Test
+	void naoDeveLancarExceptionQuandoEntidadeForNull() {
+		assertDoesNotThrow(() -> listener.preUpdate(null));
+	}
+
 	private void configurarTenant(String tenantId) {
 		Persona persona = new Persona();
 		persona.setTenantId(tenantId);

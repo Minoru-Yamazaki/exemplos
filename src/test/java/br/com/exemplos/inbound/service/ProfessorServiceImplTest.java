@@ -91,4 +91,18 @@ class ProfessorServiceImplTest {
 		verify(repository).save(any());
 	}
 
+	@Test
+	void buscarPorIdDeveLancarRuntimeExceptionQuandoThreadForInterrompida() throws Exception {
+		ProfessorServiceImpl serviceSpy = spy(service);
+		doThrow(new InterruptedException("thread interrompida")).when(serviceSpy).sleep(1000);
+
+		RuntimeException exception = assertThrows(RuntimeException.class, () -> serviceSpy.buscarPorId(1L));
+
+		assertInstanceOf(InterruptedException.class, exception.getCause());
+		assertTrue(Thread.currentThread().isInterrupted(), "A flag de interrupção da thread deve estar marcada");
+
+		// limpa a flag de interrupção para não afetar outros testes
+		Thread.interrupted();
+	}
+
 }

@@ -26,7 +26,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 	@Cacheable(value = "professores", key = "#id")
 	public ProfessorDTO buscarPorId(Long id) {
 		try {
-			Thread.sleep(1000); // Simula carregamento demorado
+			sleep(1000); // Simula carregamento demorado
 		}
 		catch (Exception e) {
 			Thread.currentThread().interrupt();
@@ -58,6 +58,10 @@ public class ProfessorServiceImpl implements ProfessorService {
 		Professor professor = repository.save(mapper.toEntity(dto));
 		log.info("Professor atualizado: {}", professor);
 		return mapper.toDto(professor);
+	}
+
+	void sleep(long milis) throws InterruptedException {
+		Thread.sleep(milis);
 	}
 
 }

@@ -20,30 +20,30 @@ import java.time.LocalDateTime;
 @EntityListeners(DomainEntityListener.class)
 public abstract class DomainEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private LocalDateTime dataInsercao;
+	private LocalDateTime dataInsercao;
 
-    private LocalDateTime dataAtualizacao;
+	private LocalDateTime dataAtualizacao;
 
-//    @Override
-//    public boolean equals(Object object) {
-//        if (this == object)
-//            return true;
-//
-//        if (object == null || getClass() != object.getClass())
-//            return false;
-//
-//        DomainEntity that = (DomainEntity) object;
-//
-//        return new EqualsBuilder().append(id, that.id).isEquals();
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return new HashCodeBuilder(17, 37).append(id).toHashCode();
-//    }
+	// @Override
+	// public boolean equals(Object object) {
+	// if (this == object)
+	// return true;
+	//
+	// if (object == null || getClass() != object.getClass())
+	// return false;
+	//
+	// DomainEntity that = (DomainEntity) object;
+	//
+	// return new EqualsBuilder().append(id, that.id).isEquals();
+	// }
+	//
+	// @Override
+	// public int hashCode() {
+	// return new HashCodeBuilder(17, 37).append(id).toHashCode();
+	// }
 
 }

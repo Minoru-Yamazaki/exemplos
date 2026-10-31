@@ -20,78 +20,83 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class TenantInterceptor implements HandlerInterceptor {
 
-    private static final String TENANT_ID_HEADER = "x-tenant-id";
+	private static final String TENANT_ID_HEADER = "x-tenant-id";
 
-//    private static final String TOKEN_HEADER = "token";
+	// private static final String TOKEN_HEADER = "token";
 
-    private static final List<String> IGNORED_TENANT_URIs = List.of("/actuator/", "/v1/nome-projeto/doc",
-            "/v1/nome-projeto/api-doc", "/v1/nome-projeto/swagger-ui");
+	private static final List<String> IGNORED_TENANT_URIs = List.of("/actuator/", "/v1/nome-projeto/doc",
+			"/v1/nome-projeto/api-doc", "/v1/nome-projeto/swagger-ui");
 
-    @Override
-    public boolean preHandle(HttpServletRequest httpRequest, HttpServletResponse httpResponse, Object object) {
+	@Override
+	public boolean preHandle(HttpServletRequest httpRequest, HttpServletResponse httpResponse, Object object) {
 
-        TenantContext.clear();
+		TenantContext.clear();
 
-        if (!IGNORED_TENANT_URIs.stream().anyMatch(uri -> httpRequest.getRequestURI().startsWith(uri))) {
-            long startTime = System.currentTimeMillis();
-            log.info("Executando TenantInterceptor.");
+		if (!IGNORED_TENANT_URIs.stream().anyMatch(uri -> httpRequest.getRequestURI().startsWith(uri))) {
+			long startTime = System.currentTimeMillis();
+			log.info("Executando TenantInterceptor.");
 
-//            if (!liberarAplicacaoUsoInterno(httpRequest) && !validarPermissaoTenantId(httpRequest)) {
-            String tenant = httpRequest.getHeader(TENANT_ID_HEADER);
-            if (!isValid(tenant)) {
-                log.info(
-                        "Execução de TenantInterceptor completada em {} ms. Usuário não autorizado a utilizar o tenant.",
-                        System.currentTimeMillis() - startTime);
-                throw DomainException.tenantNaoAutorizado();
-            }
+			// if (!liberarAplicacaoUsoInterno(httpRequest) &&
+			// !validarPermissaoTenantId(httpRequest)) {
+			String tenant = httpRequest.getHeader(TENANT_ID_HEADER);
+			if (!isValid(tenant)) {
+				log.info(
+						"Execução de TenantInterceptor completada em {} ms. Usuário não autorizado a utilizar o tenant.",
+						System.currentTimeMillis() - startTime);
+				throw DomainException.tenantNaoAutorizado();
+			}
 
-            setPersonaNoTenantContext(tenant);
-            log.info("Execução de TenantInterceptor completada em {} ms. Aplicação interna liberada.",
-                    System.currentTimeMillis() - startTime);
-        }
-        return true;
-    }
+			setPersonaNoTenantContext(tenant);
+			log.info("Execução de TenantInterceptor completada em {} ms. Aplicação interna liberada.",
+					System.currentTimeMillis() - startTime);
+		}
+		return true;
+	}
 
-    private void setPersonaNoTenantContext(String tenant) {
-        Persona persona = new Persona();
-        persona.setTenantId(tenant);
-        persona.setAplicacao("VPO");
-        persona.setPapel("EMBARCADOR");
-        TenantContext.setPerfilEmUso(persona);
-    }
+	private void setPersonaNoTenantContext(String tenant) {
+		Persona persona = new Persona();
+		persona.setTenantId(tenant);
+		persona.setAplicacao("COD");
+		persona.setPapel("EMBARCADOR");
+		TenantContext.setPerfilEmUso(persona);
+	}
 
-//    private boolean liberarAplicacaoUsoInterno(HttpServletRequest httpServletRequest) {
-//
-//        // Caso o token não esteja preenchido, quer dizer que a requisição não passou
-//        // pelo API Gateway, pois todas as requisições que passam pelo API Gateway validam
-//        // o token, dessa forma foi uma requisição interna que não precisa validar acesso
-//
-//        Optional<String> token = Optional.ofNullable(httpServletRequest.getHeader(TOKEN_HEADER));
-//        return token.isEmpty();
-//    }
+	// private boolean liberarAplicacaoUsoInterno(HttpServletRequest httpServletRequest) {
+	//
+	// // Caso o token não esteja preenchido, quer dizer que a requisição não passou
+	// // pelo API Gateway, pois todas as requisições que passam pelo API Gateway validam
+	// // o token, dessa forma foi uma requisição interna que não precisa validar acesso
+	//
+	// Optional<String> token =
+	// Optional.ofNullable(httpServletRequest.getHeader(TOKEN_HEADER));
+	// return token.isEmpty();
+	// }
 
-//    private boolean validarPermissaoTenantId(HttpServletRequest httpServletRequest) {
-//
-//        Optional<String> tenantId = Optional.ofNullable(httpServletRequest.getHeader(TENANT_ID_HEADER));
-//        Optional<String> token = Optional.ofNullable(httpServletRequest.getHeader(TOKEN_HEADER));
-//
-//        if (tenantId.isEmpty() || token.isEmpty()) {
-//            return false;
-//        }
-//
-//        return autenticacaoService.podeUtilizarEsseTenantId(token.get(), tenantId.get());
-//    }
+	// private boolean validarPermissaoTenantId(HttpServletRequest httpServletRequest) {
+	//
+	// Optional<String> tenantId =
+	// Optional.ofNullable(httpServletRequest.getHeader(TENANT_ID_HEADER));
+	// Optional<String> token =
+	// Optional.ofNullable(httpServletRequest.getHeader(TOKEN_HEADER));
+	//
+	// if (tenantId.isEmpty() || token.isEmpty()) {
+	// return false;
+	// }
+	//
+	// return autenticacaoService.podeUtilizarEsseTenantId(token.get(), tenantId.get());
+	// }
 
-    private boolean isValid(String tenantId){
-        if (Objects.isNull(tenantId)) return false;
-        CPF cpf = new CPF(tenantId);
-        return cpf.isValido();
-    }
+	private boolean isValid(String tenantId) {
+		if (Objects.isNull(tenantId))
+			return false;
+		CPF cpf = new CPF(tenantId);
+		return cpf.isValido();
+	}
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) {
-        TenantContext.clear();
-    }
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) {
+		TenantContext.clear();
+	}
 
 }

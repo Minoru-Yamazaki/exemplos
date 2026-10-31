@@ -28,6 +28,19 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<!-- Sonar -->
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.organization>minoru-yamazaki</sonar.organization>
+		<sonar.projectKey>Minoru-Yamazaki_exemplos</sonar.projectKey>
+		<sonar.exclusions>
+			**/config/**,
+			**/dto/**,
+			**/entity/**,
+			**/exception/**,
+			**/filter/**,
+			**/interceptor/**,
+			**/*Application.java
+		</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -111,6 +124,32 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+<!--		mvn spring-javaformat:apply -->
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+			</plugin>
+<!--		Sonar	-->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.14</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

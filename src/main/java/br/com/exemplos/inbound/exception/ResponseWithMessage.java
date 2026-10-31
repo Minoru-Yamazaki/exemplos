@@ -1,4 +1,4 @@
-package br.com.exemplos.inbound.excepitions;
+package br.com.exemplos.inbound.exception;
 
 import lombok.*;
 

@@ -15,11 +15,11 @@ import java.util.List;
 @ToString
 public class Professor extends MultiTenancyEntity {
 
-    private String nome;
+	private String nome;
 
-    private String cpf;
+	private String cpf;
 
-    @OneToMany(mappedBy = "professor")
-    private List<Disciplina> disciplinas;
+	@OneToMany(mappedBy = "professor")
+	private List<Disciplina> disciplinas;
 
 }

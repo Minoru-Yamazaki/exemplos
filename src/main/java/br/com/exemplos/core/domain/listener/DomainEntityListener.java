@@ -9,17 +9,17 @@ import java.util.Optional;
 
 public class DomainEntityListener {
 
-    @PrePersist
-    public void prePersist(Object entity) {
-        DomainEntity domainEntity = (DomainEntity) entity;
-        domainEntity.setDataInsercao(Optional.ofNullable(domainEntity.getDataInsercao()).orElse(LocalDateTime.now()));
-        domainEntity.setDataAtualizacao(LocalDateTime.now());
-    }
+	@PrePersist
+	public void prePersist(Object entity) {
+		DomainEntity domainEntity = (DomainEntity) entity;
+		domainEntity.setDataInsercao(Optional.ofNullable(domainEntity.getDataInsercao()).orElse(LocalDateTime.now()));
+		domainEntity.setDataAtualizacao(LocalDateTime.now());
+	}
 
-    @PreUpdate
-    public void preUpdate(Object entity) {
-        DomainEntity domainEntity = (DomainEntity) entity;
-        domainEntity.setDataAtualizacao(LocalDateTime.now());
-    }
+	@PreUpdate
+	public void preUpdate(Object entity) {
+		DomainEntity domainEntity = (DomainEntity) entity;
+		domainEntity.setDataAtualizacao(LocalDateTime.now());
+	}
 
 }

@@ -15,17 +15,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CacheServiceImpl implements CacheService {
 
-    private final CacheManager cacheManager;
+	private final CacheManager cacheManager;
 
-    @Override
-    @EventListener
-    public void on(LimparCache event){
-        DomainCache domainCache = event.getCache();
-        Cache cache = cacheManager.getCache(domainCache.getCacheName());
-        if (cache != null) {
-            log.info("Limpando cache '{}' c/ key={}", domainCache.getCacheName(), domainCache.getKey());
-            cache.evict(domainCache.getKey());
-        }
-    }
+	@Override
+	@EventListener
+	public void on(LimparCache event) {
+		DomainCache domainCache = event.getCache();
+		Cache cache = cacheManager.getCache(domainCache.getCacheName());
+		if (cache != null) {
+			log.info("Limpando cache '{}' c/ key={}", domainCache.getCacheName(), domainCache.getKey());
+			cache.evict(domainCache.getKey());
+		}
+	}
 
 }

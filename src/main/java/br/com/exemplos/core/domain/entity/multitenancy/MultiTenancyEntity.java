@@ -15,15 +15,15 @@ import org.hibernate.annotations.ParamDef;
 @MappedSuperclass
 @EntityListeners(MultiTenancyListener.class)
 @FilterDef(name = FiltroMultiTenancy.NOME_FILTRO,
-        parameters = { @ParamDef(name = FiltroMultiTenancy.NOME_ATRIBUTO, type = String.class) })
+		parameters = { @ParamDef(name = FiltroMultiTenancy.NOME_ATRIBUTO, type = String.class) })
 @Filter(name = FiltroMultiTenancy.NOME_FILTRO,
-        condition = FiltroMultiTenancy.NOME_COLUNA_BD + "= :" + FiltroMultiTenancy.NOME_ATRIBUTO)
+		condition = FiltroMultiTenancy.NOME_COLUNA_BD + "= :" + FiltroMultiTenancy.NOME_ATRIBUTO)
 public class MultiTenancyEntity extends DomainEntity {
 
-    private String tenantId;
+	private String tenantId;
 
-    public boolean isTenantNullOrEmpty() {
-        return this.tenantId == null || this.tenantId.isEmpty();
-    }
+	public boolean isTenantNullOrEmpty() {
+		return this.tenantId == null || this.tenantId.isEmpty();
+	}
 
 }

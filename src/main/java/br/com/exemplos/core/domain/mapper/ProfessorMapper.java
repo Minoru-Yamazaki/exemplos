@@ -11,13 +11,13 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring")
 public interface ProfessorMapper {
 
-    @Mapping(target = "disciplinas", qualifiedByName = "mapSemProfessor")
-    ProfessorDTO toDto(Professor entity);
+	@Mapping(target = "disciplinas", qualifiedByName = "mapSemProfessor")
+	ProfessorDTO toDto(Professor entity);
 
-    Professor toEntity(ProfessorDTO dto);
+	Professor toEntity(ProfessorDTO dto);
 
-    @Named("mapSemProfessor")
-    @Mapping(target = "professor", ignore = true)
-    DisciplinaDTO mapSemProfessor(Disciplina disciplina);
+	@Named("mapSemProfessor")
+	@Mapping(target = "professor", ignore = true)
+	DisciplinaDTO mapSemProfessor(Disciplina disciplina);
 
 }

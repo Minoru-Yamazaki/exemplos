@@ -18,44 +18,50 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProfessorServiceImpl implements ProfessorService {
 
-    private final ProfessorRepository repository;
+	private final ProfessorRepository repository;
 
-    private final ProfessorMapper mapper;
+	private final ProfessorMapper mapper;
 
-    @Override
-    @Cacheable(value = "professores", key = "#id")
-    public ProfessorDTO buscarPorId(Long id) {
-        try {
-            Thread.sleep(1000); // Simula carregamento demorado
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+	@Override
+	@Cacheable(value = "professores", key = "#id")
+	public ProfessorDTO buscarPorId(Long id) {
+		try {
+			sleep(1000); // Simula carregamento demorado
+		}
+		catch (Exception e) {
+			Thread.currentThread().interrupt();
+			log.error("Thread interrompida", e);
+			throw new RuntimeException(e);
+		}
 
-        Professor professor = repository.findById(id)
-                .orElseThrow(DomainException::professorNaoEncontrado);
-        log.info("Professor encontrado: {}", professor);
-        return mapper.toDto(professor);
-    }
+		Professor professor = repository.findById(id).orElseThrow(DomainException::professorNaoEncontrado);
+		log.info("Professor encontrado: {}", professor);
+		return mapper.toDto(professor);
+	}
 
-    @Override
-    public ProfessorDTO salvar(ProfessorDTO dto) {
-        Professor professor = repository.save(mapper.toEntity(dto));
-        log.info("Professor salvo: {}", professor);
-        return mapper.toDto(professor);
-    }
+	@Override
+	public ProfessorDTO salvar(ProfessorDTO dto) {
+		Professor professor = repository.save(mapper.toEntity(dto));
+		log.info("Professor salvo: {}", professor);
+		return mapper.toDto(professor);
+	}
 
-    @Override
-    @CacheEvict(value = "professores", key = "#id")
-    public void excluir(Long id) {
-        repository.deleteById(id);
-    }
+	@Override
+	@CacheEvict(value = "professores", key = "#id")
+	public void excluir(Long id) {
+		repository.deleteById(id);
+	}
 
-    @Override
-    @CachePut(value = "professores", key = "#dto.id")
-    public ProfessorDTO atualizar(ProfessorDTO dto) {
-        Professor professor = repository.save(mapper.toEntity(dto));
-        log.info("Professor atualizado: {}", professor);
-        return mapper.toDto(professor);
-    }
+	@Override
+	@CachePut(value = "professores", key = "#dto.id")
+	public ProfessorDTO atualizar(ProfessorDTO dto) {
+		Professor professor = repository.save(mapper.toEntity(dto));
+		log.info("Professor atualizado: {}", professor);
+		return mapper.toDto(professor);
+	}
+
+	void sleep(long milis) throws InterruptedException {
+		Thread.sleep(milis);
+	}
 
 }

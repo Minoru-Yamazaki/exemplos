@@ -11,13 +11,13 @@ import java.util.List;
 @Setter
 public class ProfessorDTO implements Serializable {
 
-    private Long id;
+	private Long id;
 
-    private String nome;
+	private String nome;
 
-    @CPF
-    private String cpf;
+	@CPF
+	private String cpf;
 
-    private List<DisciplinaDTO> disciplinas;
+	private List<DisciplinaDTO> disciplinas;
 
 }

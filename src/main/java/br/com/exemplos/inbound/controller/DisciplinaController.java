@@ -13,16 +13,16 @@ import javax.validation.Valid;
 @RequestMapping("/v1/disciplina")
 public class DisciplinaController {
 
-    private final DisciplinaService service;
+	private final DisciplinaService service;
 
-    @PostMapping
-    public ResponseEntity<DisciplinaDTO> salvar(@RequestBody @Valid DisciplinaDTO dto){
-        return ResponseEntity.status(201).body(service.salvar(dto));
-    }
+	@PostMapping
+	public ResponseEntity<DisciplinaDTO> salvar(@RequestBody @Valid DisciplinaDTO dto) {
+		return ResponseEntity.status(201).body(service.salvar(dto));
+	}
 
-    @GetMapping("{id}")
-    public ResponseEntity<DisciplinaDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.buscarPorId(id));
-    }
+	@GetMapping("{id}")
+	public ResponseEntity<DisciplinaDTO> buscarPorId(@PathVariable Long id) {
+		return ResponseEntity.ok(service.buscarPorId(id));
+	}
 
 }

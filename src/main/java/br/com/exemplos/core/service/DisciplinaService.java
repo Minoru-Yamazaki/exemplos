@@ -4,7 +4,8 @@ import br.com.exemplos.core.domain.dto.DisciplinaDTO;
 
 public interface DisciplinaService {
 
-    DisciplinaDTO salvar(DisciplinaDTO dto);
+	DisciplinaDTO salvar(DisciplinaDTO dto);
 
-    DisciplinaDTO buscarPorId(Long id);
+	DisciplinaDTO buscarPorId(Long id);
+
 }

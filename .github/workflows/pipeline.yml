@@ -9,14 +9,20 @@ on:
     branches:
       [feature, release, master]
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   build:
-    name: Compilar e testar
+    name: Compilar, testar e analisar
     runs-on: ubuntu-latest
 
     steps:
       - name: Baixar código
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Configurar Java
         uses: actions/setup-java@v4
@@ -25,5 +31,23 @@ jobs:
           java-version: '21'
           cache: maven
 
-      - name: Executar testes
-        run: mvn -B verify
+      - name: Validar formatação Java
+        run: mvn -B spring-javaformat:validate
+
+      - name: Executar testes e análise SonarQube
+        run: >
+          mvn -B verify
+          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -Dsonar.qualitygate.wait=true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy no Render
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl --fail --silent --show-error \
+            --request POST \
+            "$RENDER_DEPLOY_HOOK_URL"

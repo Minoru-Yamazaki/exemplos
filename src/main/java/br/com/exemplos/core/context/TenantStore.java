@@ -8,15 +8,15 @@ import lombok.Setter;
 @Setter
 public class TenantStore {
 
-    TenantStore() {
-    }
+	TenantStore() {
+	}
 
-    private Persona perfilEmUso;
+	private Persona perfilEmUso;
 
-    private String identificadorUsuario;
+	private String identificadorUsuario;
 
-    public boolean hasPerfilEmUso() {
-        return perfilEmUso != null;
-    }
+	public boolean hasPerfilEmUso() {
+		return perfilEmUso != null;
+	}
 
 }

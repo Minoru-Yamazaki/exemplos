@@ -6,10 +6,10 @@ import java.util.Optional;
 
 public interface ProfessorRepository {
 
-    Optional<Professor> findById(Long id);
+	Optional<Professor> findById(Long id);
 
-    Professor save(Professor professor);
+	Professor save(Professor professor);
 
-    void deleteById(Long id);
+	void deleteById(Long id);
 
 }

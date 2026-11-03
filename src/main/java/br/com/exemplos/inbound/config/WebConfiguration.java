@@ -58,21 +58,21 @@ public class WebConfiguration implements WebMvcConfigurer {
 	// public OpenAPI customOpenAPI() {
 	// return new OpenAPI()
 	// .addServersItem(
-	// customServer("https://dev.api.veloe.com.br", "Ambiente de desenvolvimento externo
-	// da VELOE"))//
+	// customServer("https://dev.api.com.br", "Ambiente de desenvolvimento externo
+	// da "))//
 	// .addServersItem(
-	// customServer("https://hml.api.veloe.com.br", "Ambiente de homologação externo da
-	// VELOE"))//
-	// .addServersItem(customServer("https://api.veloe.com.br", "Ambiente de produção
-	// externo da VELOE"))//
-	// .addServersItem(customServer("http://gestao-vpo.app.dev.veloe.com.br",
-	// "Ambiente de desenvolvimento interna VELOE"))//
+	// customServer("https://hml.api..com.br", "Ambiente de homologação externo da
+	// "))//
+	// .addServersItem(customServer("https://api.com.br", "Ambiente de produção
+	// externo da "))//
+	// .addServersItem(customServer("http://app.dev.com.br",
+	// "Ambiente de desenvolvimento interna "))//
 	// .addServersItem(
-	// customServer("http://gestao-vpo.app.hml.veloe.com.br", "Ambiente de homologação
-	// interna VELOE"))//
+	// customServer("http://app.hml.com.br", "Ambiente de homologação
+	// interna "))//
 	// .addServersItem(
-	// customServer("http://gestao-vpo.app.prd.veloe.com.br", "Ambiente de produção
-	// interna VELOE"))//
+	// customServer("http://app.prd.com.br", "Ambiente de produção
+	// interna "))//
 	// .info(new io.swagger.v3.oas.models.info.Info() //
 	// .title(SWAGGER_TITLE) //
 	// .description(SWAGGER_DESCRIPTION) //

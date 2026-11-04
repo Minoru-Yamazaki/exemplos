@@ -32,7 +32,7 @@
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.organization>minoru-yamazaki</sonar.organization>
 		<sonar.projectKey>Minoru-Yamazaki_exemplos</sonar.projectKey>
-		<sonar.exclusions>
+		<sonar.coverage.exclusions>
 			**/config/**,
 			**/dto/**,
 			**/entity/**,
@@ -40,7 +40,7 @@
 			**/filter/**,
 			**/interceptor/**,
 			**/*Application.java
-		</sonar.exclusions>
+		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
